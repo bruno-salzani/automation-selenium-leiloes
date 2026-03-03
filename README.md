@@ -1,61 +1,220 @@
-# Automação de Testes com Selenium (Plataforma de Leilões)
+# 🚀 Automação de Testes com Selenium — Leilões
 
-Este projeto utiliza o **Selenium com Java** para automatizar testes na **Plataforma de Leilões**, validando o comportamento esperado da aplicação e garantindo sua qualidade através de boas práticas como o padrão **Page Object**.
+![Status](https://img.shields.io/badge/Status-Concluído-brightgreen)
+![Framework](https://img.shields.io/badge/Framework-Selenium%20WebDriver-green)
+![Stack](https://img.shields.io/badge/Stack-Java%20%7C%20JUnit%205%20%7C%20Maven-blue)
 
-## Objetivo do Projeto
+Automação de interface para a Plataforma de Leilões, garantindo qualidade e segurança das principais jornadas do usuário por meio de testes E2E estáveis, legíveis e fáceis de manter.
 
-1. Validar o comportamento das principais funcionalidades da **Plataforma de Leilões**, como login e cadastro de leilões, garantindo que a aplicação atenda aos requisitos.
-2. Aplicar boas práticas de automação, incluindo:
-   - Uso do padrão **Page Object** para organização e reutilização de código.
-   - Testes de telas dinâmicas com AJAX.
-   - Automação do preenchimento de formulários e execução do navegador.
+---
 
-## Funcionalidades Testadas
+# 🎯 Objetivo do Projeto
 
-- **Validação de Login**:
-  - Teste de login com credenciais válidas e inválidas.
-  - Verificação de redirecionamento para a página de login ao acessar áreas restritas sem autenticação.
-  
-- **Cadastro de Leilões**:
-  - Criação de leilões com dados válidos.
-  - Validação de mensagens de erro para campos obrigatórios ou preenchidos incorretamente.
+Automatizar os cenários críticos do sistema de leilões, incluindo:
 
-- **Teste de Telas com AJAX**:
-  - Garante que as interações em tempo real sejam validadas corretamente.
+- Autenticação de usuários
+- Acesso a áreas restritas
+- Cadastro de leilões
+- Validações de formulário e mensagens de erro
 
-## Tecnologias Utilizadas
+## Foco Principal
 
-- **[Java](https://www.java.com/)**: Linguagem utilizada para desenvolvimento dos testes.
-- **[Selenium WebDriver](https://www.selenium.dev/)**: Framework para automação de navegadores.
-- **[JUnit 5](https://junit.org/junit5/)**: Framework para execução e organização dos testes.
-- **[ChromeDriver](https://sites.google.com/chromium.org/driver/)**: Driver para automação no navegador Google Chrome.
+- Confiabilidade na regressão
+- Padronização e reutilização de código
+- Estabilidade contra variações de tempo de carregamento
+- Facilidade de execução local e em CI
 
-## Vantagens do Selenium Aplicadas
+---
 
-- **Validação de comportamento esperado**: Automatização de testes que garantem a execução correta das funcionalidades.
-- **Preenchimento de formulários automaticamente**: Simula interações reais com o usuário.
-- **Teste de telas com AJAX**: Garante que atualizações dinâmicas sejam tratadas corretamente.
-- **Navegador automatizado**: O Selenium gerencia o ciclo de vida do navegador automaticamente durante os testes.
+# 🧠 Estratégia de Automação
 
-## Como Executar
+## Arquitetura da Solução
 
-### Executar a Aplicação
+Camadas e responsabilidades:
 
-1. Clone este repositório:
+1. Page Objects (Modelam as páginas e encapsulam seletores/ações)
+2. Testes (Especificam o comportamento esperado)
+3. Infra de teste (Classe base PageObject e configuração do WebDriver)
+4. Aplicação SUT (Spring Boot com H2 em memória)
+5. Relatórios JUnit gerados pelo Maven Surefire
+
+Separação clara entre:
+
+- Páginas (login, leilões, cadastro)
+- Fluxos de teste (LoginTest, LeiloesTest)
+- Configuração de WebDriver e esperas
+- Build e reports (pom.xml / target/surefire-reports)
+
+---
+
+## Estratégia Técnica Aplicada
+
+- Padrão Page Object para minimizar duplicação e aumentar legibilidade
+- WebDriver do Chrome configurado centralmente em PageObject
+- Espera implícita de 5s para sincronização com o DOM
+- Validações após cada ação relevante
+- Encerramento do navegador no teardown de cada teste
+
+---
+
+# 🔄 Fluxo de Automação
+
+1. Inicia o servidor local da aplicação
+2. Abre a tela de login e realiza autenticação
+3. Navega para a lista de leilões
+4. Carrega o formulário de novo leilão e envia os dados
+5. Verifica presença do leilão criado ou mensagens de validação
+6. Garante bloqueio de rotas quando não autenticado
+
+---
+
+# 📁 Estrutura do Projeto
+
+```bash
+automacao-selenium-leiloes/
+├── pom.xml
+├── drivers/
+│   └── chromedriver.exe
+├── src/
+│   ├── main/
+│   │   ├── java/br/com/alura/leilao/...
+│   │   └── resources/application.properties
+│   └── test/
+│       └── java/br/com/alura/leilao/
+│           ├── PageObject.java
+│           ├── login/
+│           │   ├── LoginPage.java
+│           │   └── LoginTest.java
+│           └── leiloes/
+│               ├── LeiloesPage.java
+│               ├── CadastroLeilaoPage.java
+│               └── LeiloesTest.java
 ```
-git clone https://github.com/seu-usuario/plataforma-leiloes-automation.git
+
+---
+
+# ⚙️ Funcionalidades Automatizadas
+
+## 🔐 Login
+
+- Autenticação com credenciais válidas e inválidas
+- Redirecionamento correto em rotas protegidas
+
+---
+
+## 📚 Leilões
+
+- Cadastro de leilões com dados válidos
+- Exibição de mensagens para campos inválidos
+- Checagem da última linha da tabela para o item criado
+
+---
+
+## 🖥️ Sincronização e DOM
+
+- Espera implícita configurada
+- Seletores robustos (CSS/XPath) para elementos críticos
+
+---
+
+# 🧪 Boas Práticas Aplicadas
+
+- Page Object para isolar detalhes de UI
+- Testes curtos, descritivos e independentes
+- Timeout controlado e encerramento limpo do browser
+- Estrutura de pastas previsível e padronizada
+- Build determinístico com Maven
+
+---
+
+# 📊 Gestão de Riscos
+
+## Principais Riscos Mitigados
+
+- Flakiness por carregamento/latência
+- Acesso indevido a rotas sem autenticação
+- Divergência de versão do ChromeDriver
+- Dados voláteis entre execuções
+
+## Estratégias de Mitigação
+
+- Espera implícita e navegação dirigida por URLs
+- Asserts após cada etapa relevante
+- Driver versionado no diretório drivers/
+- Banco H2 em memória, reinicializado a cada execução do servidor
+
+---
+
+# 📈 Resultados Alcançados
+
+- Regressão funcional rápida e confiável
+- Redução de esforço manual em validações repetitivas
+- Aumento da previsibilidade de build e execução
+- Base sólida para expansão de cenários
+
+---
+
+# 🛠️ Tecnologias Utilizadas
+
+- Java 8+
+- Maven
+- Selenium WebDriver (Chrome)
+- JUnit 5
+- Spring Boot (SUT)
+- H2 Database
+
+---
+
+# ▶️ Como Executar
+
+## 1️⃣ Preparar ambiente
+
+- JDK 8+ instalado
+- Maven instalado
+- Google Chrome instalado
+- Baixar o ChromeDriver compatível com sua versão do Chrome e colocá-lo em `automacao-selenium-leiloes/drivers/chromedriver.exe`
+
+## 2️⃣ Subir a aplicação
+
+```bash
+cd automacao-selenium-leiloes
+mvn spring-boot:run
 ```
-2. Importe o projeto para o Eclipse ou a IDE de sua preferência.
-3. Certifique-se de que a aplicação está configurada corretamente.
-4. Inicie o servidor a partir do arquivo: **br.com.alura.leilao.LeilaoApplication.java** run as java application
-5. Acesse a aplicação no navegador através de `http://localhost:8080`.
 
-### Executar os Testes
+A aplicação sobe em `http://localhost:8080`.
 
-1. No Eclipse, localize a pasta src/test/java no explorador de projetos.
-2. Clique com o botão direito sobre a pasta.
-3. Navegue até a opção Coverage As > JUnit Test.
-Isso irá rodar os testes e exibir a cobertura de código no painel de cobertura da IDE.
+## 3️⃣ Executar os testes
 
-se apresentar erro, pode ser que o driver do chrome esteja em uma versão diferente, neste caso
-Configure os drivers necessários, como o chromedriver, no diretório drivers/. utilizando a mesma versão do navegador
+Interface/IDE (Eclipse/IntelliJ):
+
+- Localize `src/test/java`
+- Execute as classes `LoginTest` e `LeiloesTest` como JUnit
+
+Linha de comando (Maven):
+
+```bash
+mvn -Dtest=*Test test
+```
+
+---
+
+# 📄 Relatórios
+
+Relatórios JUnit/Surefire disponíveis em:
+
+- `automacao-selenium-leiloes/target/surefire-reports`
+
+---
+
+# 🚀 Diferenciais Técnicos
+
+- Page Object centraliza seletores e ações
+- Classe base unifica configuração do WebDriver
+- Testes expressivos e estáveis
+- Pronto para integração em pipelines de CI
+
+---
+
+# 🤝 Conclusão
+
+Conjunto de testes E2E para a Plataforma de Leilões, priorizando clareza, estabilidade e manutenção simples. A estrutura facilita a expansão de cenários e a execução previsível em diferentes ambientes.
