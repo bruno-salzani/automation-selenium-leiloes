@@ -1,4 +1,4 @@
-# 🚀 Automação de Testes com Selenium — Leilões
+# 🚀 automation-selenium-leiloes
 
 ![Status](https://img.shields.io/badge/Status-Concluído-brightgreen)
 ![Framework](https://img.shields.io/badge/Framework-Selenium%20WebDriver-green)
