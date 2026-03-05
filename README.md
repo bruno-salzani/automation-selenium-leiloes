@@ -1,4 +1,4 @@
-# 🚀 automation-selenium-leiloes
+# 🚀 E2E Test Automation — SPA Auctions Platform (Selenium WebDriver)
 
 ![Status](https://img.shields.io/badge/Status-Concluído-brightgreen)
 ![Framework](https://img.shields.io/badge/Framework-Selenium%20WebDriver-green)
